@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<h1>영화 목록 페이지 입니다.</h1>
+<hr>
+<button class="btn btn-outline-success"><a href="{% url 'movies:create' %}">영화 정보 생성</a></button>
+<hr>
+<div class="row" >
+{% for movie in movies %}
+
+<div class="col-4 card" style="float: left; font-size: small;">  
+  <div class="card-header">
+    {{ movie.title|truncatewords:3 }}
+  </div>
+  <img src="{{ movie.poster_url }}" width="90%" alt=""/>
+  <div class="card-body">
+    <p class="card-title">평점: {{movie.score}}</p>
+    <p class="card-title">영화 설명</p>
+    <p class="card-text" style="text-align: justify;">{{ movie.description|truncatewords:8 }}</p>
+  </div>
+  <button class="btn btn-outline-success"><a href="{% url 'movies:detail' movie.pk %}">More</a></button>
+</div>
+
+  <br/>
+{% endfor %}
+</div>
+{% endblock %}
